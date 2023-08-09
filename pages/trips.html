@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trips</title>
+
+    <!-- External css -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+
+    <!-- External Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;700&family=Source+Sans+3:wght@400;500;700&display=swap" rel="stylesheet">
+     
+    <!-- internal css -->
+    
+    <link rel="stylesheet" href="/css/main.css">
+
+
+</head>
+<body>
+    
+    <!-- ------------------------------------------------------------------------------------------------ -->
+  <!-- Nav Bar -->
+
+    <nav class="navbar fixed-top">
+        <div class="container">
+        
+            <!-- Logo -->
+            <a class="navbar-brand" href="#">
+                <img src="/assets/logo white bg.svg" alt="Logo" height="32">
+            </a>
+
+            <!-- Nav Items -->
+            <ul class="nav">
+                <li class="nav-item">
+                <a class="nav-link " aria-current="page" href="/index.html">Home</a>
+                </li>
+                <li class="nav-item">
+                <a class="nav-link active" href="/pages/trips.html">Trips</a>
+                </li>
+                <li class="nav-item">
+                <a class="nav-link" href="/pages/cart.html">Cart</a>
+                </li>
+                <button id="navButton" class="primary-button nav-button"> Surprise me!</button>
+            </ul>
+
+        </div>
+    </nav>
+
+
+    <!-- ------------------------------------------------------------------------------------------------ -->
+  <!-- Trips -->
+
+  <div class="section">
+    <div class="container">
+      <h2>All Trips</h2>
+      <div id="all-cards-container" class="row ">
+
+
+       <template id="tripsTemplate">
+
+        <div class="col-4">
+            <div class="card">
+  
+              <div class="trip-short-details">
+                <p id="tripNameText">Caribbean</p>
+                <p id="tripPriceText"></p>
+              </div>
+  
+              <div class="trip-details">
+                <div class="flex-wrapper">
+                  <div class="trip-details_wrap">
+                    <p id="tripNameText" class="trip-details_name">Caribbean</p>
+                    <p id="tripPriceText" class="price-text"></p>
+                  </div>
+                </div>
+                <div class="flex-wrapper">
+                  <div class="trip-details_wrap">
+                    <p class="trip-detail_heading">Destinations</p>
+                    <p id="destinationText" class="trip-detail_content"></p>
+                  </div>
+                  <div class="trip-details_wrap">
+                    <p class="trip-detail_heading">Trip Length</p>
+                    <p id="lengthText" class="trip-detail_content"></p>
+                  </div>
+                  <div class="trip-details_wrap">
+                    <p class="trip-detail_heading">Departure time</p>
+                    <p id="departureText" class="trip-detail_content"></p>
+                  </div>
+                  <div class="trip-details_wrap">
+                    <p class="trip-detail_heading">Return Trip:</p>
+                    <p id="roundTripBool" class="trip-detail_content"></p>
+                  </div>
+                  <div class="trip-details_wrap">
+                    <p class="trip-detail_heading">Trip code</p>
+                    <p id="tripCodeText" class="trip-detail_content"></p>
+                  </div>
+                </div>
+                <div class="flex-wrapper">
+                  <button class="buy-ticket-button">Purchase Ticket</button>
+                </div>
+                
+              </div>
+  
+              <div class="card-bg_wrapper">
+                <img class="card-bg" src="" alt="">
+              </div>
+            </div>
+          </div>
+
+       </template>
+
+        
+      </div>
+
+    </div>
+  </div>
+
+
+    <!-- JQuery -->
+   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+   
+   <!-- Bootstrap Script -->
+   <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+   <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.3/dist/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+   <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+   
+   <!-- Local Script -->
+   <script src="/js/main.js"></script>
+
+</body>
+</html>
