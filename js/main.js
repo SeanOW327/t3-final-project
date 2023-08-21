@@ -17,6 +17,7 @@ const trips = [
       "DepartureTime": "15/06 14:30",
       "tripCode": "#MDRT76",
       "roundTrip": false,
+      "Featured": false,
       "tripDays": 7,
       "image": "destination02.jpg"
     },
@@ -27,6 +28,7 @@ const trips = [
       "DepartureTime": "10/08 10:00",
       "tripCode": "#ALSK23",
       "roundTrip": true,
+      "Featured": false,
       "tripDays": 6,
       "image": "destination03.jpg"
     },
@@ -37,6 +39,7 @@ const trips = [
       "DepartureTime": "20/09 09:45",
       "tripCode": "#GRKL12",
       "roundTrip": false,
+      "Featured": false,
       "tripDays": 5,
       "image": "destination04.jpg"
     },
@@ -47,6 +50,7 @@ const trips = [
       "DepartureTime": "05/11 12:15",
       "tripCode": "#NRFJ37",
       "roundTrip": true,
+      "Featured": false,
       "tripDays": 8,
       "image": "destination05.jpg"
     },
@@ -68,6 +72,7 @@ const trips = [
       "DepartureTime": "22/04 13:45",
       "tripCode": "#VENE14",
       "roundTrip": false,
+      "Featured": false,
       "tripDays": 3,
       "image": "destination07.jpg"
     },
@@ -78,6 +83,7 @@ const trips = [
       "DepartureTime": "06/07 11:30",
       "tripCode": "#TROP29",
       "roundTrip": true,
+      "Featured": false,
       "tripDays": 7,
       "image": "destination08.jpg"
     },
@@ -95,8 +101,6 @@ const trips = [
   ];
   
 
-
-
 $(document).ready(function(){
     loadFeaturedTrips();
     loadTrips();
@@ -106,34 +110,31 @@ $(document).ready(function(){
 // Load featured cards
 
 function loadFeaturedTrips () {
+
+  let featuredTrips = trips.filter(function(trip) {
+        return trip.Featured === true;
+      });
     
-    for (let i = 0; i < trips.length; i++) {
+    for (let i = 0; i < featuredTrips.length; i++) {
 
-        const currentIndex = $("#cards-container").children().length - 1;
-        const currentChild = $("#cards-container").children().eq(currentIndex);
+      $("#cards-container").append($("#tripsTemplate").html());
 
-        if(trips[i].Featured){
-            $("#cards-container").append($("#tripsTemplate").html());
+      let currentChild = $("#cards-container").children().eq(i+1);
 
-            
+      $(currentChild).find(".card-bg").attr('src','assets/' + featuredTrips[i].image);
+      $(currentChild).find("#tripNameText").text(featuredTrips[i].tripName);
+      $(currentChild).find("#tripPriceText").text('R ' + featuredTrips[i].price);
+      $(currentChild).find(".price-text").text('R ' + featuredTrips[i].price);
+      $(currentChild).find("#destinationText").text(featuredTrips[i].destinations.join(", "));
+      $(currentChild).find("#departureText").text(featuredTrips[i].DepartureTime);
+      $(currentChild).find("#lengthText").text(featuredTrips[i].tripDays + " days");
+      $(currentChild).find("#tripCodeText").text(featuredTrips[i].tripCode);
 
-            $(currentChild).find(".card-bg").attr('src','assets/' + trips[i].image);
-            $(currentChild).find("#tripNameText").text(trips[i].tripName);
-            $(currentChild).find("#tripPriceText").text('R ' + trips[i].price);
-            $(currentChild).find(".price-text").text('R ' + trips[i].price);
-            $(currentChild).find("#destinationText").text(trips[i].destinations.join(", "));
-            $(currentChild).find("#departureText").text(trips[i].DepartureTime);
-            $(currentChild).find("#lengthText").text(trips[i].tripDays + " days");
-            $(currentChild).find("#tripCodeText").text(trips[i].tripCode);
+      if(featuredTrips[i].roundTrip){
+          $(currentChild).find("#roundTripBool").text("Yes");
+      } else{$(currentChild).find("#roundTripBool").text("No")} 
 
-            if(trips[i].roundTrip){
-                $(currentChild).find("#roundTripBool").text("Yes");
-            } else{$(currentChild).find("#roundTripBool").text("No")} 
-
-            $(currentChild).find(".trip-details").hide();
-        }
-
-        
+      $(currentChild).find(".trip-details").hide();
         
     }
 }
@@ -155,33 +156,169 @@ $("#cards-container").on('mouseleave', '.card', function(){
 
 // Load Cards for Trips page
 
+let tripContainer = document.getElementById("all-cards-container");
+
+let defaultContainer = `
+    
+<template id="tripsTemplate">
+
+        <div class="col-4">
+            <div class="card">
+  
+              <div class="trip-short-details">
+                <p id="tripNameText">Caribbean</p>
+                <p id="tripPriceText"></p>
+              </div>
+  
+              <div class="trip-details">
+                <div class="flex-wrapper">
+                  <div class="trip-details_wrap">
+                    <p id="tripNameText" class="trip-details_name">Caribbean</p>
+                    <p id="tripPriceText" class="price-text"></p>
+                  </div>
+                </div>
+                <div class="flex-wrapper">
+                  <div class="trip-details_wrap">
+                    <p class="trip-detail_heading">Destinations</p>
+                    <p id="destinationText" class="trip-detail_content"></p>
+                  </div>
+                  <div class="trip-details_wrap">
+                    <p class="trip-detail_heading">Trip Length</p>
+                    <p id="lengthText" class="trip-detail_content"></p>
+                  </div>
+                  <div class="trip-details_wrap">
+                    <p class="trip-detail_heading">Departure time</p>
+                    <p id="departureText" class="trip-detail_content"></p>
+                  </div>
+                  <div class="trip-details_wrap">
+                    <p class="trip-detail_heading">Return Trip:</p>
+                    <p id="roundTripBool" class="trip-detail_content"></p>
+                  </div>
+                  <div class="trip-details_wrap">
+                    <p class="trip-detail_heading">Trip code</p>
+                    <p id="tripCodeText" class="trip-detail_content"></p>
+                  </div>
+                </div>
+                <div class="flex-wrapper">
+                  <button class="buy-ticket-button">Purchase Ticket</button>
+                </div>
+                
+              </div>
+  
+              <div class="card-bg_wrapper">
+                <img class="card-bg" src="" alt="">
+              </div>
+            </div>
+          </div>
+
+       </template>
+
+`;
+
 function loadTrips () {
+
+  tripContainer.innerHTML= defaultContainer;
     
     for (let i = 0; i < trips.length; i++) {
         
 
-        $("#all-cards-container").append($("#tripsTemplate").html());
+      $("#all-cards-container").append($("#tripsTemplate").html());
 
-        let currentChild = $("#all-cards-container").children().eq(i+1);
-        
-        $(currentChild).find(".card-bg").attr('src','/assets/' + trips[i].image);
-        $(currentChild).find("#tripNameText").text(trips[i].tripName);
-        $(currentChild).find("#tripPriceText").text('R ' + trips[i].price);
-        $(currentChild).find(".price-text").text('R ' + trips[i].price);
-        $(currentChild).find("#destinationText").text(trips[i].destinations.join(", "));
-        $(currentChild).find("#departureText").text(trips[i].DepartureTime);
-        $(currentChild).find("#lengthText").text(trips[i].tripDays + " days");
-        $(currentChild).find("#tripCodeText").text(trips[i].tripCode);
+      let currentChild = $("#all-cards-container").children().eq(i+1);
+      
+      $(currentChild).find(".card-bg").attr('src','/assets/' + trips[i].image);
+      $(currentChild).find("#tripNameText").text(trips[i].tripName);
+      $(currentChild).find("#tripPriceText").text('R ' + trips[i].price);
+      $(currentChild).find(".price-text").text('R ' + trips[i].price);
+      $(currentChild).find("#destinationText").text(trips[i].destinations.join(", "));
+      $(currentChild).find("#departureText").text(trips[i].DepartureTime);
+      $(currentChild).find("#lengthText").text(trips[i].tripDays + " days");
+      $(currentChild).find("#tripCodeText").text(trips[i].tripCode);
 
-        if(trips[i].roundTrip){
-            $(currentChild).find("#roundTripBool").text("Yes");
-        } else{$(currentChild).find("#roundTripBool").text("No")} 
+      if(trips[i].roundTrip){
+          $(currentChild).find("#roundTripBool").text("Yes");
+      } else{$(currentChild).find("#roundTripBool").text("No")} 
 
-        $(currentChild).find(".trip-details").hide();
+      $(currentChild).find(".trip-details").hide();
         
         
     }
 }
+
+$("#btnAll").click( function filterShortTrips () {
+
+  loadTrips();
+
+});
+
+$("#btnShort").click( function filterShortTrips () {
+
+  let shortTrips = trips.filter(function(trip) {
+      return trip.tripDays < 6;
+  });
+
+  tripContainer.innerHTML = defaultContainer;
+
+  console.log(shortTrips);
+
+  for (let i = 0; i < shortTrips.length; i++) {
+        
+    $("#all-cards-container").append($("#tripsTemplate").html());
+
+    let currentChild = $("#all-cards-container").children().eq(i+1);
+    
+    $(currentChild).find(".card-bg").attr('src','/assets/' + shortTrips[i].image);
+    $(currentChild).find("#tripNameText").text(shortTrips[i].tripName);
+    $(currentChild).find("#tripPriceText").text('R ' + shortTrips[i].price);
+    $(currentChild).find(".price-text").text('R ' + shortTrips[i].price);
+    $(currentChild).find("#destinationText").text(shortTrips[i].destinations.join(", "));
+    $(currentChild).find("#departureText").text(shortTrips[i].DepartureTime);
+    $(currentChild).find("#lengthText").text(shortTrips[i].tripDays + " days");
+    $(currentChild).find("#tripCodeText").text(shortTrips[i].tripCode);
+
+    if(shortTrips[i].roundTrip){
+        $(currentChild).find("#roundTripBool").text("Yes");
+    } else{$(currentChild).find("#roundTripBool").text("No")} 
+
+    $(currentChild).find(".trip-details").hide();
+      
+  }
+
+});
+
+$("#btnSingle").click( function filterSingleTrips () {
+
+  let singleTrips = trips.filter(function(trip) {
+      return trip.destinations.length === 1;
+  });
+
+  tripContainer.innerHTML = defaultContainer;
+
+  for (let i = 0; i < singleTrips.length; i++) {
+        
+    $("#all-cards-container").append($("#tripsTemplate").html());
+
+    let currentChild = $("#all-cards-container").children().eq(i+1);
+    
+    $(currentChild).find(".card-bg").attr('src','/assets/' + singleTrips[i].image);
+    $(currentChild).find("#tripNameText").text(singleTrips[i].tripName);
+    $(currentChild).find("#tripPriceText").text('R ' + singleTrips[i].price);
+    $(currentChild).find(".price-text").text('R ' + singleTrips[i].price);
+    $(currentChild).find("#destinationText").text(singleTrips[i].destinations.join(", "));
+    $(currentChild).find("#departureText").text(singleTrips[i].DepartureTime);
+    $(currentChild).find("#lengthText").text(singleTrips[i].tripDays + " days");
+    $(currentChild).find("#tripCodeText").text(singleTrips[i].tripCode);
+
+    if(singleTrips[i].roundTrip){
+        $(currentChild).find("#roundTripBool").text("Yes");
+    } else{$(currentChild).find("#roundTripBool").text("No")} 
+
+    $(currentChild).find(".trip-details").hide();
+      
+  }
+
+});
+
 
 $("#all-cards-container").on('mouseenter', '.card', function(){
 

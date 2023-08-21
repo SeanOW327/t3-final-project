@@ -40,6 +40,28 @@ button:hover{
     transition-duration: 200ms;
 }
 
+.filter-button{
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    background-color: #0C1117;
+    color: white;
+    margin-right: 30px;
+    border-radius: 5px;
+    transition: ease;
+    transition-duration: 200ms;
+    border: none;
+    cursor: pointer;
+}
+
+.filter-button:hover{
+    background-color: #53739D;
+    transition: ease;
+    
+    transition-duration: 200ms;
+}
+
 .primary-button{
     display: flex;
     padding: 14px 40px;
@@ -241,4 +263,12 @@ button:hover{
     display: flex;
     flex-direction: column;
     gap: 10px;
+}
+
+
+/* ---------------------------------------------------------------- */
+/* Trips Page */
+
+.buttonWrap{
+    padding-bottom: 60px;
 }
