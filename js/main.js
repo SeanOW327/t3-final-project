@@ -217,7 +217,7 @@ let defaultContainer = `
 
 function loadTrips () {
 
-  tripContainer.innerHTML= defaultContainer;
+  tripContainer.innerHTML = defaultContainer;
     
     for (let i = 0; i < trips.length; i++) {
         
@@ -351,7 +351,6 @@ loadRowBoatTrips = () => {
   filteredArray.sort(function(a, b) {
   return a.price - b.price;
   });
-  console.log(filteredArray);
   displayCheapestContent();
 }
 
@@ -359,7 +358,6 @@ loadRowBoatTrips = () => {
 sortFunction = () => {
 
   let sortValue = document.getElementById("sort-options").value;
-  console.log(sortValue);
 
   if (sortValue === "all") {
     loadTrips()
@@ -432,68 +430,58 @@ $(document).ready(function() {
 });
 
 
+// let defaultTable = `
 
-addToCart = () => {
-  let data = JSON.stringify(tripSelection);
-  localStorage.setItem('trip', data);
-  window.location.href = 'checkout.html';
-}
+// <template>
+//                     <tr id="row-1" class="wish-item">
+//                         <th scope="row">1</th>
+//                         <td>
+//                           <p class="trip-code">#IDUF54</p>
+//                         </td>
+//                         <td>
+//                           <p class="ticket-quantity">5</p>
+//                         </td>
+//                         <td>
+//                           <p class="total-cost">R1055</p>
+//                         </td>
+//                         <td>
+//                           <button id="remove-2" class="remove-button">
+//                             remove
+//                           </button>
+//                         </td>
+//                       </tr>
+//                 </template>
 
+// `;
 
-let defaultTable = `
-
-<template>
-                    <tr id="row-1" class="wish-item">
-                        <th scope="row">1</th>
-                        <td>
-                          <p class="trip-code">#IDUF54</p>
-                        </td>
-                        <td>
-                          <p class="ticket-quantity">5</p>
-                        </td>
-                        <td>
-                          <p class="total-cost">R1055</p>
-                        </td>
-                        <td>
-                          <button id="remove-2" class="remove-button">
-                            remove
-                          </button>
-                        </td>
-                      </tr>
-                </template>
-
-`;
-
-let cartContainer = document.getElementById("table-body");
+// let cartContainer = document.getElementById("table-body");
 
 
 
-displayCartContent = () => {
-  cartContainer.innerHTML = defaultTable;
+// displayCartContent = () => {
 
-  let retrievedCart = JSON.parse(localStorage.getItem('trip'));
-  console.log(retrievedCart);
+//   let retrievedCart = JSON.parse(localStorage.getItem('trip'));
+//   console.log(retrievedCart);
 
-  // let finalCart = [];
-  // for(i = 0; i < retrievedCart.length; i++){
-  //   let checkingCode = retrievedCart[i].tripCode;
-  //   for(i = 0, ){
+//   // let finalCart = [];
+//   // for(i = 0; i < retrievedCart.length; i++){
+//   //   let checkingCode = retrievedCart[i].tripCode;
+//   //   for(i = 0, ){
 
-  //   }
-  // };
+//   //   }
+//   // };
 
-  for (let i = 0; i < retrievedCart.length ; i++) {
+//   for (let i = 0; i < retrievedCart.length ; i++) {
       
-    $("#table-body").append($("#table-template").html());
+//     $("#table-body").append($("#table-template").content());
+//     console.log(retrievedCart[i].tripCode)
   
-    let currentChild = $("#table-body").children().eq(i+1);
-    console.log("calculating")
-    
-    $(currentChild).find(".trip-code").text(retrievedCart[i].tripCode);
-    $(currentChild).find(".ticket-quantity").text(1);
-    $(currentChild).find(".trip-code").text(retrievedCart[i].price);
+//     let currentChild = $("#table-body").children().eq(i+1);
+//     $(currentChild).find(".trip-code").text(retrievedCart[i].tripCode);
+//     $(currentChild).find(".ticket-quantity").text(1);
+//     $(currentChild).find(".trip-code").text(retrievedCart[i].price);
   
       
-  }
+//   }
 
-}
+// }
