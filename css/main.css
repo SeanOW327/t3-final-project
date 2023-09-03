@@ -100,6 +100,11 @@ button:hover{
     background-color: #53739D;
 }
 
+.btn-wrap{
+    display: flex;
+    justify-content: center;
+}
+
 /* ---------------------------------------- */
 /* Bootstrap Component Overrides */
 
@@ -107,6 +112,18 @@ button:hover{
 
 .navbar{
     background-color: white;
+    height: 90px;
+}
+
+.navbar-brand{
+    transition: ease;
+    transition-duration: 200ms;
+}
+
+.navbar-brand:hover{
+    scale: 1.1;
+    transition: ease;
+    transition-duration: 200ms;
 }
 
 .nav-link{
@@ -266,9 +283,84 @@ button:hover{
 }
 
 
+/* card */
+
+.accordion-button:not(.collapsed){
+    background-color: white;
+}
+
+
 /* ---------------------------------------------------------------- */
 /* Trips Page */
 
 .buttonWrap{
     padding-bottom: 60px;
+}
+
+#sort-options{
+    width: 320px;
+    font-size: 24px;
+    padding-left: 15px;
+    padding-right: 15px;
+    background-color: #2E4057;
+    color: white;
+    border-radius: 5px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    border: none;
+}
+
+
+/* ---------------------------------------------------------------- */
+/* Footer */
+
+.footer{
+    padding: 30px;
+    background-color: #0C1117;
+    color: white;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.footer p{
+    margin: 0;
+}
+
+.socials{
+    display: flex;
+}
+
+.social-link{
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background-position: center;
+    background-repeat: no-repeat;
+    transition: ease-out;
+    transition-duration: 0.2s;
+    margin-left: 30px;
+    border: 2px solid #FFF;
+}
+
+.social-link:hover{
+    background-color: #53739D;
+    transition: ease-out;
+    transition-duration: 0.2s;
+    cursor: pointer;
+}
+
+.youtube{background-image: url("../assets/youtube.svg");}
+.facebook{background-image: url("../assets/facebook.svg");}
+.twitter{background-image: url("../assets/twitter.svg");}
+.instagram{background-image: url("../assets/instagram.svg");}
+
+
+/* ---------------------------------------------------------------- */
+/* Cart Page */
+
+.cart-left{
+    padding-top: 100px;
+    padding-left: 120px;
 }
